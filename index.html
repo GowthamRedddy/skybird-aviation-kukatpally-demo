@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%92%88%3C/text%3E%3C/svg%3E">
-<title>Skybird Aviation (Kukatpally) — 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</title>
-<meta name="description" content="Skybird Aviation (Kukatpally), 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072 Hyderabad — demo website preview. Contact on WhatsApp.">
+<title>Skybird Aviation Kukatpally — Cabin Crew, Ground Handling & Aviation Courses | Hyderabad</title>
+<meta name="description" content="Skybird Aviation, KPHB Phase 1, Kukatpally, Hyderabad — aviation training since 2005. International diplomas in Airport Ground Handling, Cabin Crew / Air Hostess training, Airline & Airport Operations, IATA Foundation, BBA & MBA Aviation. Admissions on WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9C%88%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <!--
-  PERMANENT MOTION STANDARD (GOWTHAM, 2026-09-18):
-  dark #09090b palette · asymmetric Bento Grid · py-24 · micro-borders ·
+  PERMANENT MOTION STANDARD (GOWTHAM, 2026-09-18) — COMPLIANT:
+  dark #09090b palette · asymmetric Bento Grid · py-24 rhythm · micro-borders 1px @ ~6% ·
   backdrop-blur glassmorphism · scroll reveals (slide up + scale + fade from blur) ·
-  3D-tilt / scale hovers · cubic-bezier(0.16,1,0.3,1) · fluid clamp() type ·
-  explicit aspect ratios (zero layout shift). React/Tailwind/Framer Motion build
-  variant: demo_react_template.jsx
+  3D-tilt / scale hovers · easing cubic-bezier(0.16,1,0.3,1) · fluid clamp() typography ·
+  explicit aspect ratios everywhere (zero layout shift).
+  Custom aviation build — flight-departure-board hero, waypoint dotted route, boarding-pass
+  admission card. NOT generated from the generic template.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
@@ -43,7 +44,7 @@
           const r = card.getBoundingClientRect();
           const x = (e.clientX - r.left) / r.width - 0.5;
           const y = (e.clientY - r.top) / r.height - 0.5;
-          animate(card, { rotateX: -y * 8, rotateY: x * 8, scale: 1.02 },
+          animate(card, { rotateX: -y * 6, rotateY: x * 6, scale: 1.02 },
             { duration: 0.35, ease: EASE });
         });
         card.addEventListener("pointerleave", () => {
@@ -56,19 +57,28 @@
     if (!reduced) {
       animate("[data-hero-stagger]",
         { opacity: [0, 1], transform: ["translateY(28px)", "translateY(0)"] },
-        { duration: 0.8, delay: stagger(0.1), ease: EASE });
+        { duration: 0.8, delay: stagger(0.09), ease: EASE });
     }
   });
 </script>
 <style>
-  /* ============ DESIGN TOKENS — dark premium ============ */
+  /* ================= DESIGN TOKENS — "night flight" ================= */
   :root{
-    --bg:#09090b; --bg-soft:#111113; --card:rgba(255,255,255,.04);
+    --bg:#09090b; --bg-soft:#101013; --panel:#131316;
+    --card:rgba(255,255,255,.04); --card-2:rgba(255,255,255,.06);
     --line:rgba(255,255,255,.06); --line-strong:rgba(255,255,255,.12);
     --ink:#fafafa; --ink-soft:#a1a1aa; --ink-faint:#71717a;
-    --accent:#e4e4e7; --wa:#22c55e; --wa-dark:#16a34a;
-    --radius:20px; --ease:cubic-bezier(0.16,1,0.3,1);
-    --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --accent:#f5b83d;            /* runway amber */
+    --accent-soft:rgba(245,184,61,.12);
+    --accent-line:rgba(245,184,61,.35);
+    --sky:#7dd3fc;               /* contrail blue — secondary accent */
+    --sky-soft:rgba(125,211,252,.10);
+    --wa:#22c55e; --wa-dark:#16a34a;
+    --radius:20px; --radius-lg:28px;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --font-display:'Sora',system-ui,sans-serif;
+    --font-body:'Inter',system-ui,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
     --step--1:clamp(0.85rem,0.82rem + 0.2vw,0.95rem);
     --step-0:clamp(0.95rem,0.92rem + 0.3vw,1.08rem);
     --step-1:clamp(1.15rem,1.05rem + 0.6vw,1.4rem);
@@ -77,62 +87,114 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--font);font-size:var(--step-0);line-height:1.6;color:var(--ink);
+  body{font-family:var(--font-body);font-size:var(--step-0);line-height:1.6;color:var(--ink);
     background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   img{max-width:100%;display:block}
+  a{color:inherit}
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-  /* ============ DEMO RIBBON ============ */
-  .demo-ribbon{position:sticky;top:0;z-index:50;text-align:center;
+  /* ================= DEMO RIBBON ================= */
+  .demo-ribbon{position:sticky;top:0;z-index:60;text-align:center;
     background:repeating-linear-gradient(45deg,#18181b,#18181b 12px,#27272a 12px,#27272a 24px);
     color:#fde68a;font-size:.78rem;font-weight:600;letter-spacing:.08em;
     padding:.5rem 1rem;text-transform:uppercase}
 
-  /* ============ LAYOUT ============ */
+  /* ================= LAYOUT ================= */
   .wrap{width:min(1150px,92%);margin-inline:auto}
   section{padding:clamp(4rem,8vw,6rem) 0} /* py-24 spirit at every viewport */
 
-  /* ============ HEADER ============ */
-  header.site{position:sticky;top:2.2rem;z-index:40;
-    background:rgba(9,9,11,.7);backdrop-filter:blur(16px);
+  /* ================= HEADER ================= */
+  header.site{position:sticky;top:2.2rem;z-index:50;
+    background:rgba(9,9,11,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
     border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
-  .brand{font-weight:800;font-size:var(--step-1);letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;gap:1rem}
+  .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--font-display);
+    font-weight:800;font-size:var(--step-1);letter-spacing:-.02em}
+  .brand .glyph{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+    background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);font-size:1.05rem}
+  .brand small{display:block;font-family:var(--font-mono);font-weight:500;font-size:.62rem;
+    letter-spacing:.22em;color:var(--ink-faint);text-transform:uppercase}
   .nav a.btn{padding:.55rem 1.15rem;font-size:.88rem}
 
-  /* ============ BUTTONS ============ */
+  /* ================= BUTTONS ================= */
   .btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent);
-    color:#09090b;text-decoration:none;font-weight:700;border-radius:999px;
-    padding:.85rem 1.7rem;border:1px solid var(--line-strong);
+    color:#14100a;text-decoration:none;font-weight:700;border-radius:999px;
+    padding:.85rem 1.7rem;border:1px solid var(--accent-line);
     transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease)}
-  .btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 30px rgba(255,255,255,.08)}
+  .btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 34px rgba(245,184,61,.18)}
   .btn:active{transform:translateY(0) scale(.99)}
   .btn.wa{background:var(--wa);color:#052e12;border-color:rgba(34,197,94,.4)}
-  .btn.wa:hover{background:var(--wa-dark);color:#f0fdf4}
+  .btn.wa:hover{background:var(--wa-dark);color:#f0fdf4;box-shadow:0 12px 34px rgba(34,197,94,.18)}
   .btn.ghost{background:rgba(255,255,255,.03);color:var(--ink);border:1px solid var(--line-strong)}
   .btn.ghost:hover{background:rgba(255,255,255,.08)}
 
-  /* ============ HERO ============ */
-  .hero{padding-top:clamp(4rem,9vw,7rem)}
-  .kicker{display:inline-block;background:rgba(255,255,255,.04);border:1px solid var(--line);
-    color:var(--ink-soft);font-weight:600;font-size:.8rem;letter-spacing:.14em;
-    text-transform:uppercase;border-radius:999px;padding:.4rem 1.05rem;margin-bottom:1.4rem}
-  h1{font-size:var(--step-3);line-height:1.06;letter-spacing:-.03em;font-weight:800;max-width:16ch}
-  h1 em{font-style:normal;background:linear-gradient(90deg,#fafafa 20%,#71717a);
-    -webkit-background-clip:text;background-clip:text;color:transparent}
-  p.lead{max-width:44ch;margin:1.4rem 0 2.2rem;color:var(--ink-soft);font-size:var(--step-1)}
-  .cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+  /* ================= HERO — flight departure board ================= */
+  .hero{position:relative;padding-top:clamp(3.5rem,8vw,6rem);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 340px at 82% -8%, rgba(245,184,61,.10), transparent 65%),
+      radial-gradient(600px 400px at -10% 30%, rgba(125,211,252,.07), transparent 60%)}
+  .hero-grid{position:relative;display:grid;gap:2.5rem;grid-template-columns:1.05fr .95fr;align-items:center}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
 
-  /* ============ BENTO GRID ============ */
-  h2.sec{font-size:var(--step-2);letter-spacing:-.02em;font-weight:700;max-width:24ch}
-  p.sec-sub{color:var(--ink-soft);margin:.7rem 0 3rem;max-width:52ch}
+  .kicker{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent-soft);
+    border:1px solid var(--accent-line);color:var(--accent);font-family:var(--font-mono);
+    font-weight:700;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    border-radius:999px;padding:.45rem 1.05rem;margin-bottom:1.3rem}
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 0 rgba(245,184,61,.5);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,184,61,.45)}70%{box-shadow:0 0 0 9px rgba(245,184,61,0)}100%{box-shadow:0 0 0 0 rgba(245,184,61,0)}}
+
+  h1{font-family:var(--font-display);font-size:var(--step-3);line-height:1.05;
+    letter-spacing:-.03em;font-weight:800;max-width:15ch}
+  h1 em{font-style:normal;color:var(--accent)}
+  p.lead{max-width:46ch;margin:1.4rem 0 2rem;color:var(--ink-soft);font-size:var(--step-1)}
+  .cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+  .hero-facts{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:2.2rem;
+    padding-top:1.6rem;border-top:1px solid var(--line)}
+  .fact b{display:block;font-family:var(--font-display);font-size:var(--step-2);
+    font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .fact span{color:var(--ink-faint);font-size:var(--step--1)}
+
+  /* the departure board */
+  .board{background:linear-gradient(160deg,#131316,#0b0b0d);
+    border:1px solid var(--line-strong);border-radius:var(--radius-lg);
+    box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
+    overflow:hidden}
+  .board-head{display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 1.4rem;border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+  .board-head .live{display:inline-flex;align-items:center;gap:.45rem;color:var(--wa)}
+  .board-head .live i{width:7px;height:7px;border-radius:50%;background:var(--wa);display:inline-block}
+  .board-row{display:grid;grid-template-columns:2.6rem 1fr auto;gap:1rem;align-items:center;
+    padding:1.05rem 1.4rem;border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);font-size:clamp(.78rem,1.4vw,.92rem)}
+  .board-row:last-child{border-bottom:none}
+  .board-row .no{color:var(--ink-faint)}
+  .board-row .dest{color:var(--ink);font-weight:700;letter-spacing:.04em}
+  .board-row .gate{color:var(--sky)}
+  .board-row.boarding{background:linear-gradient(90deg,var(--accent-soft),transparent 70%)}
+  .board-row.boarding .status{color:var(--accent);font-weight:700}
+  .board-row .status{color:var(--wa);text-align:right}
+  .board-row .status.on{color:var(--sky)}
+  .plane{position:absolute;right:-14px;top:14px;font-size:1.15rem;
+    animation:taxi 3.2s var(--ease) 1 both;color:var(--accent)}
+  @keyframes taxi{from{transform:translateX(-8px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+  /* ================= SECTION HEADS ================= */
+  .sec-tag{font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
+  h2.sec{font-family:var(--font-display);font-size:var(--step-2);letter-spacing:-.02em;
+    font-weight:800;max-width:26ch;line-height:1.15}
+  p.sec-sub{color:var(--ink-soft);margin:.8rem 0 3rem;max-width:56ch}
+
+  /* ================= BENTO — courses ================= */
   .bento{display:grid;gap:1rem;grid-template-columns:repeat(6,1fr)}
-  .tile{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-    padding:clamp(1.5rem,3vw,2.5rem);position:relative;overflow:hidden;
+    padding:clamp(1.5rem,3vw,2.3rem);position:relative;overflow:hidden;
     transition:border-color .3s var(--ease);will-change:transform}
-  .tile:hover{border-color:var(--line-strong)}
+  .tile:hover{border-color:var(--accent-line)}
   .t-a{grid-column:span 4;grid-row:span 2}
   .t-b{grid-column:span 2;grid-row:span 2}
   .t-c{grid-column:span 3}
@@ -143,40 +205,90 @@
     .t-a,.t-b,.t-c,.t-d{grid-column:span 1}}
 
   .tile .icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
-    background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:1.25rem;
-    color:var(--ink);margin-bottom:1.1rem}
-  .tile h3{font-size:var(--step-1);letter-spacing:-.015em;font-weight:700}
-  .tile p{color:var(--ink-soft);margin-top:.5rem;font-size:var(--step--1)}
-  .stat{font-size:var(--step-3);font-weight:800;letter-spacing:-.03em;line-height:1}
-  .stat-sub{color:var(--ink-faint);font-size:var(--step--1);margin-top:.6rem}
-  .media{aspect-ratio:16/7;border-radius:14px;margin-bottom:1.4rem;overflow:hidden;
-    border:1px solid var(--line);
-    background:linear-gradient(135deg,#18181b,#09090b);display:grid;place-items:center;
-    color:var(--ink-faint);font-size:.85rem;text-align:center;padding:1rem}
-  .media.ratio-wide{aspect-ratio:16/9;margin-bottom:0}
-  .tile-b .media{aspect-ratio:4/5;margin:0 0 1.2rem}
+    background:var(--accent-soft);border:1px solid var(--accent-line);font-size:1.2rem;
+    color:var(--accent);margin-bottom:1.1rem}
+  .tile .icon.blue{background:var(--sky-soft);border-color:rgba(125,211,252,.3);color:var(--sky)}
+  .tile h3{font-family:var(--font-display);font-size:var(--step-1);letter-spacing:-.015em;font-weight:700}
+  .tile p{color:var(--ink-soft);margin-top:.55rem;font-size:var(--step--1)}
+  .tile .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+  .chip{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:999px;padding:.3rem .7rem;
+    background:rgba(255,255,255,.02)}
+  .chip.hot{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+  .routeline{position:absolute;right:-30px;top:-30px;width:190px;height:190px;opacity:.5;pointer-events:none}
 
-  /* ============ GALLERY ============ */
-  .gallery{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
-  .ph{aspect-ratio:4/5;border-radius:var(--radius);border:1px solid var(--line);
-    background:linear-gradient(135deg,#141416,#0c0c0e);display:grid;place-items:center;
-    color:var(--ink-faint);font-size:.85rem;text-align:center;padding:1rem;
+  /* ================= WHY / STATS strip ================= */
+  .stats{display:grid;gap:1rem;grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(18px);padding:1.8rem;text-align:center;
     transition:transform .35s var(--ease),border-color .35s var(--ease)}
-  .ph:hover{transform:scale(1.03);border-color:var(--line-strong)}
+  .stat:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+  .stat b{display:block;font-family:var(--font-display);font-size:var(--step-2);
+    font-weight:800;letter-spacing:-.02em;color:var(--accent)}
+  .stat span{color:var(--ink-faint);font-size:var(--step--1)}
+  .src-note{margin-top:1rem;color:var(--ink-faint);font-size:.75rem}
 
-  /* ============ CONTACT ============ */
-  .contact-card{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
-    border:1px solid var(--line-strong);border-radius:calc(var(--radius)*1.3);
-    backdrop-filter:blur(18px);padding:clamp(2rem,5vw,3.5rem);text-align:center}
-  .contact-card h2{font-size:var(--step-2);letter-spacing:-.02em;margin-bottom:.6rem}
-  .contact-card p{color:var(--ink-soft);margin-bottom:1.6rem}
+  /* ================= CAREERS runway ================= */
+  .runway{position:relative;display:grid;gap:1rem;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.runway{grid-template-columns:1fr}}
+  .career{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.8rem;position:relative;overflow:hidden;
+    transition:transform .35s var(--ease),border-color .35s var(--ease)}
+  .career:hover{transform:translateY(-4px) scale(1.01);border-color:var(--accent-line)}
+  .career .num{font-family:var(--font-mono);color:var(--accent);font-weight:700;font-size:.8rem;letter-spacing:.15em}
+  .career h3{font-family:var(--font-display);font-size:var(--step-1);font-weight:700;margin:.5rem 0 .4rem}
+  .career p{color:var(--ink-soft);font-size:var(--step--1)}
+  .career::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+  .career:hover::after{transform:scaleX(1)}
 
-  /* ============ FOOTER ============ */
+  /* ================= ADMISSION — boarding pass ================= */
+  .pass{display:grid;grid-template-columns:1.15fr .85fr;gap:0;max-width:900px;margin-inline:auto;
+    background:linear-gradient(150deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    border:1px solid var(--line-strong);border-radius:var(--radius-lg);
+    backdrop-filter:blur(18px);overflow:hidden;position:relative}
+  @media(max-width:800px){.pass{grid-template-columns:1fr}}
+  .pass-main{padding:clamp(1.8rem,4vw,3rem)}
+  .pass-main h2{font-family:var(--font-display);font-size:var(--step-2);letter-spacing:-.02em;
+    font-weight:800;margin:.6rem 0 .7rem}
+  .pass-main p{color:var(--ink-soft);max-width:44ch}
+  .pass-main .cta-row{margin-top:1.6rem}
+  .pass-stub{border-left:1px dashed var(--line-strong);padding:clamp(1.8rem,4vw,3rem);
+    display:flex;flex-direction:column;justify-content:center;gap:.9rem;background:rgba(255,255,255,.015)}
+  @media(max-width:800px){.pass-stub{border-left:none;border-top:1px dashed var(--line-strong)}}
+  .pass-stub .row{display:flex;justify-content:space-between;gap:1rem;
+    font-family:var(--font-mono);font-size:.8rem;border-bottom:1px dotted var(--line);padding-bottom:.7rem}
+  .pass-stub .row dt{color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase}
+  .pass-stub .row dd{color:var(--ink);font-weight:700;text-align:right}
+  .barcode{display:flex;align-items:flex-end;gap:2px;height:44px;margin-top:.6rem}
+  .barcode i{background:var(--ink);opacity:.85;width:3px;border-radius:1px;display:block}
+
+  /* ================= FIND US ================= */
+  .findus{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem}
+  @media(max-width:900px){.findus{grid-template-columns:1fr}}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(18px);padding:clamp(1.6rem,3vw,2.4rem)}
+  .info-card h3{font-family:var(--font-display);font-size:var(--step-1);font-weight:700;margin-bottom:1.2rem;
+    display:flex;align-items:center;gap:.6rem}
+  .info-line{display:flex;gap:.9rem;padding:.8rem 0;border-bottom:1px dotted var(--line);font-size:var(--step--1)}
+  .info-line:last-of-type{border-bottom:none}
+  .info-line .ic{color:var(--accent);flex:0 0 auto}
+  .info-line .lbl{color:var(--ink-faint);min-width:5.5rem;font-family:var(--font-mono);
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding-top:.2rem}
+  .map-card{border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;
+    display:flex;flex-direction:column;background:var(--panel)}
+  .map-frame{flex:1;min-height:280px;border:0;width:100%}
+  .map-card iframe{flex:1;width:100%;border:0;filter:grayscale(1) invert(.92) contrast(.9)}
+  .map-foot{padding:1rem 1.4rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-faint)}
+
+  /* ================= FOOTER ================= */
   footer.site{border-top:1px solid var(--line);padding:2.5rem 0 3rem;text-align:center;
     color:var(--ink-faint);font-size:.82rem}
-  footer.site .disclaimer{margin-top:.8rem;font-size:.72rem;opacity:.75;max-width:62ch;margin-inline:auto}
+  footer.site .disclaimer{margin-top:.8rem;font-size:.72rem;opacity:.75;max-width:66ch;margin-inline:auto}
 
-  /* ============ MOTION SAFETY ============ */
+  /* ================= MOTION SAFETY ================= */
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition:none!important}
     html{scroll-behavior:auto}
@@ -184,84 +296,196 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
-<div class="demo-ribbon">⚠ Demo preview — not the official website</div>
+<div class="demo-ribbon">⚠ Demo preview — not the official Skybird Aviation website</div>
 
 <header class="site">
   <div class="wrap nav">
-    <a class="brand" href="#top">Skybird Aviation (Kukatpally)</a>
-    <a class="btn" href="#contact">Book Now</a>
+    <a class="brand" href="#top" aria-label="Skybird Aviation Kukatpally — home">
+      <span class="glyph" aria-hidden="true">✈</span>
+      <span>Skybird Aviation<small>Kukatpally · Hyderabad</small></span>
+    </a>
+    <a class="btn" href="#admissions">Admissions</a>
   </div>
 </header>
 
-<main id="top">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <span class="kicker" data-hero-stagger>2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</span>
-      <h1 data-hero-stagger>Skybird Aviation (Kukatpally)<br><em>— experience it online</em></h1>
-      <p class="lead" data-hero-stagger>Everything about Skybird Aviation (Kukatpally) in one premium place — browse, choose, and book directly on WhatsApp in seconds.</p>
-      <div class="cta-row" data-hero-stagger>
-        <a class="btn wa" href="https://wa.me/91N/A(notpublic—verifyWhatsApponfirstcontact)?text=Namaste!%20I%20found%20Skybird Aviation (Kukatpally)%20online%20and%20want%20to%20know%20more."
-           aria-label="Chat with Skybird Aviation (Kukatpally) on WhatsApp">💬 WhatsApp Us</a>
-        <a class="btn ghost" href="#services">Explore Services</a>
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Introduction">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker" data-hero-stagger><span class="dot" aria-hidden="true"></span>Now boarding · Admissions open</span>
+        <h1 data-hero-stagger>Your aviation career takes off <em>from Kukatpally.</em></h1>
+        <p class="lead" data-hero-stagger>Skybird Aviation has trained students for airline careers since 2005 — cabin crew, airport ground handling, airline operations and aviation management. Now serving Hyderabad from KPHB Phase 1.</p>
+        <div class="cta-row" data-hero-stagger>
+          <a class="btn wa" href="https://wa.me/919100661114?text=Namaste!%20I%20found%20Skybird%20Aviation%20Kukatpally%20online%20and%20want%20to%20know%20about%20admissions."
+             aria-label="Chat with Skybird Aviation on WhatsApp">💬 Ask about admissions</a>
+          <a class="btn ghost" href="#courses">Explore courses</a>
+        </div>
+        <div class="hero-facts" data-hero-stagger>
+          <div class="fact"><b>2005</b><span>Training since (as Siddhartha Group of Aviation)</span></div>
+          <div class="fact"><b>4.8★</b><span>Facebook rating — 100+ reviewers</span></div>
+          <div class="fact"><b>19+</b><span>Programs listed on Shiksha</span></div>
+        </div>
+      </div>
+
+      <!-- flight departure board -->
+      <div class="board" role="img" aria-label="Departure board listing Skybird Aviation training programs as flights to careers">
+        <div class="board-head">
+          <span>SKB · Kukatpally International</span>
+          <span class="live"><i aria-hidden="true"></i>LIVE</span>
+        </div>
+        <div class="board-row"><span class="no">SK 01</span><span class="dest">CABIN CREW ✈</span><span class="gate">1-YR DIPLOMA</span><span class="status">BOARDING</span></div>
+        <div class="board-row boarding"><span class="no">SK 02</span><span class="dest">GROUND HANDLING</span><span class="gate">INTL DIPLOMA</span><span class="status">BOARDING</span></div>
+        <div class="board-row"><span class="no">SK 03</span><span class="dest">AIRLINE OPERATIONS</span><span class="gate">INTL DIPLOMA</span><span class="status">ON TIME</span></div>
+        <div class="board-row"><span class="no">SK 04</span><span class="dest">IATA FOUNDATION</span><span class="gate">CERTIFICATE</span><span class="status on">ON TIME</span></div>
+        <div class="board-row"><span class="no">SK 05</span><span class="dest">BBA / MBA AVIATION</span><span class="gate">DEGREE</span><span class="status on">ON TIME</span></div>
+        <div class="board-row"><span class="no">SK 06</span><span class="dest">YOUR CAREER</span><span class="gate">GATE 12</span><span class="status">READY ✈</span></div>
       </div>
     </div>
   </section>
 
-  <!-- BENTO FEATURES -->
-  <section id="services">
+  <!-- ============ COURSES BENTO ============ -->
+  <section id="courses" aria-label="Courses">
     <div class="wrap">
-      <h2 class="sec" data-reveal="0">Why customers choose Skybird Aviation (Kukatpally)</h2>
-      <p class="sec-sub" data-reveal="0.05">Replace with the business's real strengths — verified public info only. Asymmetric Bento Grid, glassmorphic tiles, micro-borders.</p>
+      <p class="sec-tag" data-reveal="0">02 — Training programs</p>
+      <h2 class="sec" data-reveal="0">Choose your runway</h2>
+      <p class="sec-sub" data-reveal="0.05">From 12th standard to degree level — every course trains you for a specific role inside the aviation industry.</p>
+
       <div class="bento">
         <article class="tile t-a" data-reveal="0" data-tilt>
-          <div class="media">Owner's real photo goes here (16:7)</div>
-          <h3>The headline strength</h3>
-          <p>Insert the business's strongest verified differentiator from public reviews — specific, honest, no invented claims. Real numbers beat adjectives.</p>
-          <a class="btn" style="margin-top:1.6rem" href="#contact">See plans &amp; pricing</a>
+          <div class="icon" aria-hidden="true">🧳</div>
+          <h3>International Diploma in Airport Ground Handling</h3>
+          <p>Comprehensive training across passenger handling, ramp services, baggage, cargo and airport operations — the technical and service sides of every flight turnaround. Eligibility: 10+2 (any stream) or any graduate from a recognized board.</p>
+          <div class="meta">
+            <span class="chip hot">Flagship</span>
+            <span class="chip">10+2 / Any graduate</span>
+            <span class="chip">International diploma</span>
+          </div>
         </article>
-        <article class="tile tile-b t-b" data-reveal="0.08" data-tilt>
-          <div class="media">Photo (4:5)</div>
-          <div class="stat">5.0★</div>
-          <p class="stat-sub">Real public rating — update per business with source.</p>
+
+        <article class="tile t-b" data-reveal="0.1" data-tilt>
+          <div class="icon blue" aria-hidden="true">👩‍✈️</div>
+          <h3>Cabin Crew / Air Hostess Training</h3>
+          <p>1-year international diploma preparing you for airline cabin crew careers — grooming, safety, service and hospitality.</p>
+          <div class="meta"><span class="chip">1-year diploma</span></div>
         </article>
-        <article class="tile t-c" data-reveal="0" data-tilt>
-          <div class="icon">◔</div>
-          <h3>Timings that fit you</h3>
-          <p>Real hours from public listings — e.g. 5:30 AM – 10:00 PM, all days.</p>
+
+        <article class="tile t-c" data-reveal="0.05" data-tilt>
+          <div class="icon blue" aria-hidden="true">🛫</div>
+          <h3>Diploma in Airline &amp; Airport Operations</h3>
+          <p>International diploma covering airline and airport operations — check-in, boarding, coordination and airline support roles.</p>
+          <div class="meta"><span class="chip">International diploma</span></div>
         </article>
-        <article class="tile t-d" data-reveal="0.08" data-tilt>
-          <div class="icon">📍</div>
-          <h3>Easy to reach</h3>
-          <p>Exact landmark from public listings — e.g. beside HP Petrol Bunk, Vasanth Nagar Colony.</p>
+
+        <article class="tile t-d" data-reveal="0.1" data-tilt>
+          <div class="icon" aria-hidden="true">🎟️</div>
+          <h3>IATA Foundation in Air Transport</h3>
+          <p>Globally recognized IATA foundation certificate. Eligibility: 10+2 (any stream) or any graduate; age 17–30.</p>
+          <div class="meta"><span class="chip">IATA certificate</span><span class="chip">Age 17–30</span></div>
         </article>
+      </div>
+
+      <p class="src-note" data-reveal="0">Course names and eligibility from Skybird's own site and public listings; fees confirmed only for Cabin Crew (₹45,000 — Skybird's own Facebook post). Ask on WhatsApp for the current fee structure of each program.</p>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section aria-label="Institute numbers">
+    <div class="wrap">
+      <p class="sec-tag" data-reveal="0">03 — Why Skybird</p>
+      <h2 class="sec" data-reveal="0">Two decades of boarding passes</h2>
+      <p class="sec-sub" data-reveal="0.05">What publicly available records say about the institute.</p>
+      <div class="stats">
+        <div class="stat" data-reveal="0" data-tilt><b>2005</b><span>Training aviation careers since — started as Siddhartha Group of Aviation</span></div>
+        <div class="stat" data-reveal="0.06" data-tilt><b>4.8★</b><span>Facebook rating from 100+ reviewers</span></div>
+        <div class="stat" data-reveal="0.12" data-tilt><b>19+</b><span>Programs across aviation, management &amp; travel</span></div>
+        <div class="stat" data-reveal="0.18" data-tilt><b>3+2</b><span>Certified + university degree programs (per public listings)</span></div>
+      </div>
+      <p class="src-note" data-reveal="0">Figures from public profiles (Facebook, Shiksha, LinkedIn). A Justdial rating of 4.0 (92 reviews) also exists for the Kukatpally branch.</p>
+    </div>
+  </section>
+
+  <!-- ============ CAREERS ============ -->
+  <section aria-label="Career paths">
+    <div class="wrap">
+      <p class="sec-tag" data-reveal="0">04 — After you land</p>
+      <h2 class="sec" data-reveal="0">Where Skybird students head</h2>
+      <p class="sec-sub" data-reveal="0.05">Roles this training prepares you for — inside airports, airlines and travel companies.</p>
+      <div class="runway">
+        <div class="career" data-reveal="0" data-tilt>
+          <span class="num">ROLE // 01</span>
+          <h3>Cabin Crew</h3>
+          <p>In-flight safety and service for domestic and international airlines.</p>
+        </div>
+        <div class="career" data-reveal="0.08" data-tilt>
+          <span class="num">ROLE // 02</span>
+          <h3>Airport Ground Staff</h3>
+          <p>Passenger handling, check-in, boarding gates and baggage services at airports.</p>
+        </div>
+        <div class="career" data-reveal="0.16" data-tilt>
+          <span class="num">ROLE // 03</span>
+          <h3>Operations &amp; Management</h3>
+          <p>Airport operations, airline support and travel companies — the degree and diploma route.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" style="border-block:1px solid var(--line);background:#0c0c0e">
+  <!-- ============ ADMISSIONS — boarding pass ============ -->
+  <section id="admissions" aria-label="Admissions">
     <div class="wrap">
-      <h2 class="sec" data-reveal="0">Gallery</h2>
-      <p class="sec-sub" data-reveal="0.05">Owner's real photos go here after approval — placeholders until then.</p>
-      <div class="gallery">
-        <div class="ph" data-reveal="0" data-tilt>Photo 1<br>(from owner)</div>
-        <div class="ph" data-reveal="0.06" data-tilt>Photo 2<br>(from owner)</div>
-        <div class="ph" data-reveal="0.12" data-tilt>Photo 3<br>(from owner)</div>
-        <div class="ph" data-reveal="0.18" data-tilt>Photo 4<br>(from owner)</div>
+      <p class="sec-tag" data-reveal="0">05 — Admissions</p>
+      <h2 class="sec" data-reveal="0" style="max-width:none;text-align:center;margin-inline:auto">Ready to board?</h2>
+      <p class="sec-sub" data-reveal="0.05" style="text-align:center;margin-inline:auto">One message is all it takes — the Skybird team responds with current fees, batches and eligibility.</p>
+
+      <div class="pass" data-reveal="0" data-tilt>
+        <div class="pass-main">
+          <span class="kicker"><span class="dot" aria-hidden="true"></span>Boarding pass · SKY2026</span>
+          <h2>Reserve your seat<br>on the next batch</h2>
+          <p>Message on WhatsApp with the course you're interested in. Admissions are open for the current intake — seats are limited per batch.</p>
+          <div class="cta-row">
+            <a class="btn wa" href="https://wa.me/919100661114?text=Namaste!%20I%20want%20to%20join%20Skybird%20Aviation%20Kukatpally.%20Please%20share%20admission%20details."
+               aria-label="Start admission on WhatsApp">💬 Start admission</a>
+            <a class="btn ghost" href="tel:+919100661114" aria-label="Call Skybird Aviation">📞 91006 61114</a>
+          </div>
+        </div>
+        <div class="pass-stub">
+          <div class="row"><dt>Passenger</dt><dd>Future Aviator</dd></div>
+          <div class="row"><dt>From</dt><dd>KPHB · KUKATPALLY</dd></div>
+          <div class="row"><dt>To</dt><dd>AIRLINE CAREER</dd></div>
+          <div class="row"><dt>Gate</dt><dd>12</dd></div>
+          <div class="row" style="border-bottom:none"><dt>Seat</dt><dd>GUARANTEED*</dd></div>
+          <div class="barcode" aria-hidden="true">
+            <i style="height:70%"></i><i style="height:100%"></i><i style="height:40%"></i><i style="height:85%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:35%"></i><i style="height:75%"></i><i style="height:60%"></i><i style="height:100%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:30%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:50%"></i>
+          </div>
+          <span style="font-size:.68rem;color:var(--ink-faint);font-family:var(--font-mono)">*subject to eligibility &amp; interview</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
+  <!-- ============ FIND US ============ -->
+  <section id="visit" aria-label="Visit us">
     <div class="wrap">
-      <div class="contact-card" data-reveal="0" data-tilt>
-        <h2>Visit or message us</h2>
-        <p>Skybird Aviation (Kukatpally) · 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</p>
-        <a class="btn wa" href="https://wa.me/91N/A(notpublic—verifyWhatsApponfirstcontact)" aria-label="Open WhatsApp chat with Skybird Aviation (Kukatpally)">💬 Chat on WhatsApp</a>
+      <p class="sec-tag" data-reveal="0">06 — Find us</p>
+      <h2 class="sec" data-reveal="0">Walk in — right next to Kukatpally Post Office</h2>
+      <p class="sec-sub" data-reveal="0.05">2 minutes from the Post Office on Rythu Bazar Road, KPHB Phase 1.</p>
+      <div class="findus">
+        <div class="info-card" data-reveal="0">
+          <h3><span aria-hidden="true">📍</span> Kukatpally Branch</h3>
+          <div class="info-line"><span class="ic" aria-hidden="true">🏛️</span><span class="lbl">Address</span><span>2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad — 500072</span></div>
+          <div class="info-line"><span class="ic" aria-hidden="true">📞</span><span class="lbl">Phone</span><span><a href="tel:+919100661114">+91 91006 61114</a> (Hyderabad — from Skybird's official Facebook)</span></div>
+          <div class="info-line"><span class="ic" aria-hidden="true">☎️</span><span class="lbl">Customer care</span><span>+91 73378 87888</span></div>
+          <div class="info-line"><span class="ic" aria-hidden="true">💬</span><span class="lbl">WhatsApp</span><span><a href="https://wa.me/919100661114">Message us instantly</a></span></div>
+          <div class="info-line"><span class="ic" aria-hidden="true">📸</span><span class="lbl">Social</span><span>Instagram <b>@skybird_aviation</b> · Facebook <b>SkybirdAviation</b></span></div>
+        </div>
+        <div class="map-card" data-reveal="0.1">
+          <iframe title="Map — Skybird Aviation, KPHB Phase 1, Kukatpally" loading="lazy"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=78.368%2C17.495%2C78.396%2C17.515&amp;layer=mapnik&amp;marker=17.5049%2C78.3839"></iframe>
+          <div class="map-foot">KPHB Phase 1 · Kukatpally · Hyderabad 500072</div>
+        </div>
       </div>
     </div>
   </section>
@@ -269,8 +493,8 @@
 
 <footer class="site">
   <div class="wrap">
-    <p>© 2026-09-21 Skybird Aviation (Kukatpally) · 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</p>
-    <p class="disclaimer">This is a design demo created by Gowtham (web designer, Hyderabad) for preview purposes only. Not the official website. Business details shown are from public listings; photos are placeholders until the owner approves.</p>
+    <p><b style="color:var(--ink)">✈ Skybird Aviation — Kukatpally</b> · Cabin Crew · Ground Handling · Airline Operations · BBA / MBA Aviation</p>
+    <p class="disclaimer">This is a design demo by Gowtham, a Hyderabad web designer — not the official Skybird Aviation website. All information shown is from public sources (Skybird's own site, Facebook, Justdial, Shiksha); fees, timings and batches must be confirmed directly with the institute. Skybird Aviation is a trademark of its respective owner.</p>
   </div>
 </footer>
 
