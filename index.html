@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%92%88%3C/text%3E%3C/svg%3E">
+<title>Skybird Aviation (Kukatpally) — 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</title>
+<meta name="description" content="Skybird Aviation (Kukatpally), 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072 Hyderabad — demo website preview. Contact on WhatsApp.">
+<!--
+  PERMANENT MOTION STANDARD (GOWTHAM, 2026-09-18):
+  dark #09090b palette · asymmetric Bento Grid · py-24 · micro-borders ·
+  backdrop-blur glassmorphism · scroll reveals (slide up + scale + fade from blur) ·
+  3D-tilt / scale hovers · cubic-bezier(0.16,1,0.3,1) · fluid clamp() type ·
+  explicit aspect ratios (zero layout shift). React/Tailwind/Framer Motion build
+  variant: demo_react_template.jsx
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
+<script>
+  /* ---- Motion engine config (Framer Motion UMD, animates DOM via WAAPI) ---- */
+  const EASE = [0.16, 1, 0.3, 1];
+  document.addEventListener("DOMContentLoaded", () => {
+    const { animate, inView, stagger } = window.Motion;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* scroll reveals: slide up + scale + fade from blur */
+    inView("[data-reveal]", (el) => {
+      if (reduced) return;
+      animate(el.target,
+        { opacity: [0, 1], transform: ["translateY(48px) scale(0.94)", "translateY(0px) scale(1)"], filter: ["blur(10px)", "blur(0px)"] },
+        { duration: 0.9, delay: (parseFloat(el.target.dataset.reveal) || 0), ease: EASE });
+    }, { margin: "0px 0px -12% 0px" });
+
+    /* 3D tilt hovers (pointer-fine devices only) */
+    if (matchMedia("(pointer:fine)").matches && !reduced) {
+      document.querySelectorAll("[data-tilt]").forEach((card) => {
+        card.style.transformPerspective = "900px";
+        card.addEventListener("pointermove", (e) => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          animate(card, { rotateX: -y * 8, rotateY: x * 8, scale: 1.02 },
+            { duration: 0.35, ease: EASE });
+        });
+        card.addEventListener("pointerleave", () => {
+          animate(card, { rotateX: 0, rotateY: 0, scale: 1 }, { duration: 0.5, ease: EASE });
+        });
+      });
+    }
+
+    /* staggered hero entrance */
+    if (!reduced) {
+      animate("[data-hero-stagger]",
+        { opacity: [0, 1], transform: ["translateY(28px)", "translateY(0)"] },
+        { duration: 0.8, delay: stagger(0.1), ease: EASE });
+    }
+  });
+</script>
+<style>
+  /* ============ DESIGN TOKENS — dark premium ============ */
+  :root{
+    --bg:#09090b; --bg-soft:#111113; --card:rgba(255,255,255,.04);
+    --line:rgba(255,255,255,.06); --line-strong:rgba(255,255,255,.12);
+    --ink:#fafafa; --ink-soft:#a1a1aa; --ink-faint:#71717a;
+    --accent:#e4e4e7; --wa:#22c55e; --wa-dark:#16a34a;
+    --radius:20px; --ease:cubic-bezier(0.16,1,0.3,1);
+    --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --step--1:clamp(0.85rem,0.82rem + 0.2vw,0.95rem);
+    --step-0:clamp(0.95rem,0.92rem + 0.3vw,1.08rem);
+    --step-1:clamp(1.15rem,1.05rem + 0.6vw,1.4rem);
+    --step-2:clamp(1.5rem,1.3rem + 1.2vw,2.1rem);
+    --step-3:clamp(2.1rem,1.5rem + 3vw,3.6rem);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);font-size:var(--step-0);line-height:1.6;color:var(--ink);
+    background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  /* ============ DEMO RIBBON ============ */
+  .demo-ribbon{position:sticky;top:0;z-index:50;text-align:center;
+    background:repeating-linear-gradient(45deg,#18181b,#18181b 12px,#27272a 12px,#27272a 24px);
+    color:#fde68a;font-size:.78rem;font-weight:600;letter-spacing:.08em;
+    padding:.5rem 1rem;text-transform:uppercase}
+
+  /* ============ LAYOUT ============ */
+  .wrap{width:min(1150px,92%);margin-inline:auto}
+  section{padding:clamp(4rem,8vw,6rem) 0} /* py-24 spirit at every viewport */
+
+  /* ============ HEADER ============ */
+  header.site{position:sticky;top:2.2rem;z-index:40;
+    background:rgba(9,9,11,.7);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+  .brand{font-weight:800;font-size:var(--step-1);letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+  .nav a.btn{padding:.55rem 1.15rem;font-size:.88rem}
+
+  /* ============ BUTTONS ============ */
+  .btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent);
+    color:#09090b;text-decoration:none;font-weight:700;border-radius:999px;
+    padding:.85rem 1.7rem;border:1px solid var(--line-strong);
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease)}
+  .btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 30px rgba(255,255,255,.08)}
+  .btn:active{transform:translateY(0) scale(.99)}
+  .btn.wa{background:var(--wa);color:#052e12;border-color:rgba(34,197,94,.4)}
+  .btn.wa:hover{background:var(--wa-dark);color:#f0fdf4}
+  .btn.ghost{background:rgba(255,255,255,.03);color:var(--ink);border:1px solid var(--line-strong)}
+  .btn.ghost:hover{background:rgba(255,255,255,.08)}
+
+  /* ============ HERO ============ */
+  .hero{padding-top:clamp(4rem,9vw,7rem)}
+  .kicker{display:inline-block;background:rgba(255,255,255,.04);border:1px solid var(--line);
+    color:var(--ink-soft);font-weight:600;font-size:.8rem;letter-spacing:.14em;
+    text-transform:uppercase;border-radius:999px;padding:.4rem 1.05rem;margin-bottom:1.4rem}
+  h1{font-size:var(--step-3);line-height:1.06;letter-spacing:-.03em;font-weight:800;max-width:16ch}
+  h1 em{font-style:normal;background:linear-gradient(90deg,#fafafa 20%,#71717a);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  p.lead{max-width:44ch;margin:1.4rem 0 2.2rem;color:var(--ink-soft);font-size:var(--step-1)}
+  .cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+
+  /* ============ BENTO GRID ============ */
+  h2.sec{font-size:var(--step-2);letter-spacing:-.02em;font-weight:700;max-width:24ch}
+  p.sec-sub{color:var(--ink-soft);margin:.7rem 0 3rem;max-width:52ch}
+  .bento{display:grid;gap:1rem;grid-template-columns:repeat(6,1fr)}
+  .tile{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    padding:clamp(1.5rem,3vw,2.5rem);position:relative;overflow:hidden;
+    transition:border-color .3s var(--ease);will-change:transform}
+  .tile:hover{border-color:var(--line-strong)}
+  .t-a{grid-column:span 4;grid-row:span 2}
+  .t-b{grid-column:span 2;grid-row:span 2}
+  .t-c{grid-column:span 3}
+  .t-d{grid-column:span 3}
+  @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}
+    .t-a,.t-b,.t-c,.t-d{grid-column:span 2;grid-row:auto}}
+  @media(max-width:560px){.bento{grid-template-columns:1fr}
+    .t-a,.t-b,.t-c,.t-d{grid-column:span 1}}
+
+  .tile .icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:1.25rem;
+    color:var(--ink);margin-bottom:1.1rem}
+  .tile h3{font-size:var(--step-1);letter-spacing:-.015em;font-weight:700}
+  .tile p{color:var(--ink-soft);margin-top:.5rem;font-size:var(--step--1)}
+  .stat{font-size:var(--step-3);font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat-sub{color:var(--ink-faint);font-size:var(--step--1);margin-top:.6rem}
+  .media{aspect-ratio:16/7;border-radius:14px;margin-bottom:1.4rem;overflow:hidden;
+    border:1px solid var(--line);
+    background:linear-gradient(135deg,#18181b,#09090b);display:grid;place-items:center;
+    color:var(--ink-faint);font-size:.85rem;text-align:center;padding:1rem}
+  .media.ratio-wide{aspect-ratio:16/9;margin-bottom:0}
+  .tile-b .media{aspect-ratio:4/5;margin:0 0 1.2rem}
+
+  /* ============ GALLERY ============ */
+  .gallery{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+  .ph{aspect-ratio:4/5;border-radius:var(--radius);border:1px solid var(--line);
+    background:linear-gradient(135deg,#141416,#0c0c0e);display:grid;place-items:center;
+    color:var(--ink-faint);font-size:.85rem;text-align:center;padding:1rem;
+    transition:transform .35s var(--ease),border-color .35s var(--ease)}
+  .ph:hover{transform:scale(1.03);border-color:var(--line-strong)}
+
+  /* ============ CONTACT ============ */
+  .contact-card{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+    border:1px solid var(--line-strong);border-radius:calc(var(--radius)*1.3);
+    backdrop-filter:blur(18px);padding:clamp(2rem,5vw,3.5rem);text-align:center}
+  .contact-card h2{font-size:var(--step-2);letter-spacing:-.02em;margin-bottom:.6rem}
+  .contact-card p{color:var(--ink-soft);margin-bottom:1.6rem}
+
+  /* ============ FOOTER ============ */
+  footer.site{border-top:1px solid var(--line);padding:2.5rem 0 3rem;text-align:center;
+    color:var(--ink-faint);font-size:.82rem}
+  footer.site .disclaimer{margin-top:.8rem;font-size:.72rem;opacity:.75;max-width:62ch;margin-inline:auto}
+
+  /* ============ MOTION SAFETY ============ */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    [data-reveal]{opacity:1!important;filter:none!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon">⚠ Demo preview — not the official website</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">Skybird Aviation (Kukatpally)</a>
+    <a class="btn" href="#contact">Book Now</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker" data-hero-stagger>2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</span>
+      <h1 data-hero-stagger>Skybird Aviation (Kukatpally)<br><em>— experience it online</em></h1>
+      <p class="lead" data-hero-stagger>Everything about Skybird Aviation (Kukatpally) in one premium place — browse, choose, and book directly on WhatsApp in seconds.</p>
+      <div class="cta-row" data-hero-stagger>
+        <a class="btn wa" href="https://wa.me/91N/A(notpublic—verifyWhatsApponfirstcontact)?text=Namaste!%20I%20found%20Skybird Aviation (Kukatpally)%20online%20and%20want%20to%20know%20more."
+           aria-label="Chat with Skybird Aviation (Kukatpally) on WhatsApp">💬 WhatsApp Us</a>
+        <a class="btn ghost" href="#services">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO FEATURES -->
+  <section id="services">
+    <div class="wrap">
+      <h2 class="sec" data-reveal="0">Why customers choose Skybird Aviation (Kukatpally)</h2>
+      <p class="sec-sub" data-reveal="0.05">Replace with the business's real strengths — verified public info only. Asymmetric Bento Grid, glassmorphic tiles, micro-borders.</p>
+      <div class="bento">
+        <article class="tile t-a" data-reveal="0" data-tilt>
+          <div class="media">Owner's real photo goes here (16:7)</div>
+          <h3>The headline strength</h3>
+          <p>Insert the business's strongest verified differentiator from public reviews — specific, honest, no invented claims. Real numbers beat adjectives.</p>
+          <a class="btn" style="margin-top:1.6rem" href="#contact">See plans &amp; pricing</a>
+        </article>
+        <article class="tile tile-b t-b" data-reveal="0.08" data-tilt>
+          <div class="media">Photo (4:5)</div>
+          <div class="stat">5.0★</div>
+          <p class="stat-sub">Real public rating — update per business with source.</p>
+        </article>
+        <article class="tile t-c" data-reveal="0" data-tilt>
+          <div class="icon">◔</div>
+          <h3>Timings that fit you</h3>
+          <p>Real hours from public listings — e.g. 5:30 AM – 10:00 PM, all days.</p>
+        </article>
+        <article class="tile t-d" data-reveal="0.08" data-tilt>
+          <div class="icon">📍</div>
+          <h3>Easy to reach</h3>
+          <p>Exact landmark from public listings — e.g. beside HP Petrol Bunk, Vasanth Nagar Colony.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="border-block:1px solid var(--line);background:#0c0c0e">
+    <div class="wrap">
+      <h2 class="sec" data-reveal="0">Gallery</h2>
+      <p class="sec-sub" data-reveal="0.05">Owner's real photos go here after approval — placeholders until then.</p>
+      <div class="gallery">
+        <div class="ph" data-reveal="0" data-tilt>Photo 1<br>(from owner)</div>
+        <div class="ph" data-reveal="0.06" data-tilt>Photo 2<br>(from owner)</div>
+        <div class="ph" data-reveal="0.12" data-tilt>Photo 3<br>(from owner)</div>
+        <div class="ph" data-reveal="0.18" data-tilt>Photo 4<br>(from owner)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-card" data-reveal="0" data-tilt>
+        <h2>Visit or message us</h2>
+        <p>Skybird Aviation (Kukatpally) · 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</p>
+        <a class="btn wa" href="https://wa.me/91N/A(notpublic—verifyWhatsApponfirstcontact)" aria-label="Open WhatsApp chat with Skybird Aviation (Kukatpally)">💬 Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026-09-21 Skybird Aviation (Kukatpally) · 2nd Floor, Above Punjab National Bank, Near Post Office, Rythu Bazar Road, KPHB Phase 1, Kukatpally, Hyderabad - 500072, Hyderabad</p>
+    <p class="disclaimer">This is a design demo created by Gowtham (web designer, Hyderabad) for preview purposes only. Not the official website. Business details shown are from public listings; photos are placeholders until the owner approves.</p>
+  </div>
+</footer>
+
+</body>
+</html>
